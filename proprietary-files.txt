@@ -186,6 +186,9 @@ vendor/lib64/vendor.mediatek.hardware.bluetooth.audio@2.2.so
 vendor/firmware/soc2_2_ram_mcu_1_1_hdr.bin
 vendor/firmware/soc2_2_ram_mcu_1a_1_hdr.bin
 
+# ConsumerIR
+vendor/lib64/hw/consumerir.common.so
+
 # Display
 vendor/bin/hw/mt6833/android.hardware.graphics.allocator@4.0-service-mediatek.mt6833:vendor/bin/hw/android.hardware.graphics.allocator@4.0-service-mediatek
 vendor/bin/hw/vendor.mediatek.hardware.pq@2.2-service

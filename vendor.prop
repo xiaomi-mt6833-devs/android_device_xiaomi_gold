@@ -32,6 +32,9 @@ persist.bluetooth.a2dp_offload.cap=sbc-aac
 persist.bluetooth.a2dp_offload.disabled=false
 vendor.bluetooth.ldac.abr=true
 
+# ConsumerIR
+ro.hardware.consumerir=common
+
 # Display
 ro.hardware.egl=meow
 ro.hardware.vulkan=mali
