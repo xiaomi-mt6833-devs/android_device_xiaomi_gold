@@ -157,6 +157,10 @@ vendor/etc/audio_param/VolumeGainMap_ParamUnitDesc.xml
 vendor/etc/audio_param/Volume_AudioParam.xml
 vendor/etc/audio_param/Volume_ParamUnitDesc.xml
 
+# Connectivity
+vendor/firmware/soc2_2_ram_mcu_1_1_hdr.bin
+vendor/firmware/soc2_2_ram_mcu_1a_1_hdr.bin
+
 # Display
 vendor/bin/hw/mt6833/android.hardware.graphics.allocator@4.0-service-mediatek.mt6833:vendor/bin/hw/android.hardware.graphics.allocator@4.0-service-mediatek
 vendor/bin/hw/vendor.mediatek.hardware.pq@2.2-service
