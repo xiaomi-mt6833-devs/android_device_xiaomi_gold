@@ -257,6 +257,11 @@
         <fqname>@1.0::INetdagent/default</fqname>
     </hal>
     <hal format="hidl">
+        <name>vendor.mediatek.hardware.netdagent</name>
+        <transport>hwbinder</transport>
+        <fqname>@1.0::INetdagent/default</fqname>
+    </hal>
+    <hal format="hidl">
         <name>vendor.mediatek.hardware.nvram</name>
         <transport>hwbinder</transport>
         <fqname>@1.1::INvram/default</fqname>
