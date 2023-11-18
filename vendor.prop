@@ -1,3 +1,17 @@
+# Audio
+audio.deep_buffer.media=true
+audio.offload.video=true
+audio.offload.min.duration.secs=30
+aaudio.mmap_policy=2
+aaudio.mmap_exclusive_policy=2
+ro.vendor.audio.gain.support=true
+ro.config.media_vol_default=10
+ro.config.vc_call_vol_steps=11
+ro.vendor.audio.soundtrigger.wakeupword=5
+vendor.audio.spkcal.copy.inhal=true
+vendor.audiohal.telephonytx.type=2
+persist.vendor.audio.misound.disable=true
+
 # Display
 ro.hardware.egl=meow
 ro.hardware.vulkan=mali
