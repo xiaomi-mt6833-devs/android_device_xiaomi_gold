@@ -75,8 +75,7 @@ PRODUCT_PACKAGES += \
 
 # ConsumerIR
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-impl:64 \
-    android.hardware.ir@1.0-service
+    android.hardware.ir-service.example
 
 # Display
 PRODUCT_PACKAGES += \
