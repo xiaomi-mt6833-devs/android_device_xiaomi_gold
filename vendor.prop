@@ -83,6 +83,9 @@ ro.vendor.smvr.p2batch.vga=32
 ro.vendor.smvr.p2batch.hd=16
 ro.vendor.smvr.p2batch.fhd=8
 
+# Sensors
+ro.vendor.mtk.sensor.support=yes
+
 # SurfaceFlinger
 ro.surface_flinger.primary_display_orientation=ORIENTATION_0
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
