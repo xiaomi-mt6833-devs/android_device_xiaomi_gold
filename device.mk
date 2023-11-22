@@ -180,7 +180,8 @@ PRODUCT_SHIPPING_API_LEVEL := 31
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@2.1-service.xiaomi-multihal \
-    libsensorndkbridge
+    libsensorndkbridge \
+    libshim_sensors
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
