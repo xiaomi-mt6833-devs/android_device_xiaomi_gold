@@ -13,6 +13,7 @@ vendor.audiohal.telephonytx.type=2
 persist.vendor.audio.misound.disable=true
 
 # Bluetooth
+bluetooth.device.class_of_device=90,2,12
 ro.bluetooth.a2dp_offload.supported=true
 persist.bluetooth.a2dp_offload.cap=sbc-aac
 persist.bluetooth.a2dp_offload.disabled=false
