@@ -43,10 +43,23 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 TARGET_BOOTLOADER_BOARD_NAME := gold
 TARGET_NO_BOOTLOADER := true
 
+# Kernel
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_KERNEL_SOURCE := kernel/xiaomi/mt6833
+TARGET_KERNEL_CONFIG := gold_defconfig
+TARGET_KERNEL_CLANG_VERSION := r450784e
+BOARD_KERNEL_IMAGE_NAME := Image.gz
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+
 # Platform
 TARGET_BOARD_PLATFORM := mt6833
 BOARD_HAS_MTK_HARDWARE := true
 BOARD_VENDOR := xiaomi
+
+# Verified Boot
+BOARD_AVB_ENABLE := true
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 
 # Inherit the proprietary files
 include vendor/xiaomi/gold/BoardConfigVendor.mk
