@@ -104,6 +104,21 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     init.recovery.mt6781.rc
 
+PRODUCT_PACKAGES += \
+    fstab.mt6833 \
+    init.aee.rc \
+    init.ago.rc \
+    init.cgroup.rc \
+    init.connectivity.common.rc \
+    init.connectivity.rc \
+    init.modem.rc \
+    init.mt6833.rc \
+    init.mt6833.usb.rc \
+    init.mtkgki.rc \
+    init.project.rc \
+    init.sensor_2_0.rc \
+    init_connectivity.rc
+
 # Shipping API level
 PRODUCT_SHIPPING_API_LEVEL := 31
 

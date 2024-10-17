@@ -1,0 +1,209 @@
+import /vendor/etc/init/hw/init.mtkgki.rc
+
+# MTK project .rc configure
+# N17 NFC modify by zhangyize at 2023.7.19 start
+import /vendor/odm/etc/init/${ro.boot.product.hardware.sku}/init.stnfc.rc
+import /vendor/odm/etc/init/${ro.boot.product.hardware.sku}/android.hardware.nfc@1.2-service-st.rc
+import /vendor/odm/etc/init/${ro.boot.product.hardware.sku}/android.hardware.secure_element@1.2-service-mediatek.rc
+# N17 NFC modify by zhangyize at 2023.7.19 end
+on early-init
+    exec_background u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules trace_mmstat.ko
+
+on init
+    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
+    mkdir /storage/usbotg 0700 root root
+    write /sys/module/musb_hdrc/parameters/mu3d_force_on 1
+
+on post-fs-data
+
+#Camera
+    chmod 0660 /dev/MAINAF
+    chown system camera /dev/MAINAF
+
+    chmod 0660 /dev/MAINAF2
+    chown system camera /dev/MAINAF2
+
+    chmod 0660 /dev/SUBAF
+    chown system camera /dev/SUBAF
+
+    chmod 0660 /dev/GAF001AF
+    chown system camera /dev/GAF001AF
+
+    chmod 0660 /dev/DW9714AF
+    chown system camera /dev/DW9714AF
+
+    chmod 0660 /dev/LC898212AF
+    chown system camera /dev/LC898212AF
+
+    chmod 0660 /dev/BU64745GWZAF
+    chown system camera /dev/BU64745GWZAF
+
+#SMB
+    chown system system /proc/smb/ScreenComm
+    chmod 0660 /proc/smb/ScreenComm
+
+    chmod 0660 /dev/spm
+    chown system system /dev/spm
+
+#N17 code for HQ-295629 by lienci at 20230516 start
+#dual calib
+    chmod 0777 /mnt/vendor/persist/camera/rear_dc_cal_wd.bin
+    chmod 0777 /mnt/vendor/persist/camera/rear_dc_cal_wu.bin
+    chmod 0777 /mnt/vendor/persist/camera/rear_dc_cal_wt.bin
+    chmod 0777 /data/vendor/camera/rear_dc_cal_wd.bin
+    chmod 0777 /data/vendor/camera/rear_dc_cal_wu.bin
+    restorecon /mnt/vendor/persist/camera/rear_dc_cal_wd.bin
+    restorecon /mnt/vendor/persist/camera/rear_dc_cal_wu.bin
+
+    mkdir /mnt/vendor/persist 0777 system camera
+    mkdir /mnt/vendor/persist/camera 0777 system camera
+
+    chmod 0777 /vendor/etc/camera/com.xiaomi.dcal.wd.golden
+    chmod 0777 /vendor/etc/camera/com.xiaomi.dcal.wu.golden
+
+    chmod 0777 /vendor/etc/camera/golden_ov13b10_i_ov2180_i.bin
+    chmod 0777 /vendor/etc/camera/golden_ov13b10_i_ov2180_ii.bin
+    chmod 0777 /vendor/etc/camera/golden_ov13b10_ii_ov2180_i.bin
+    chmod 0777 /vendor/etc/camera/golden_ov13b10_ii_ov2180_ii.bin
+    chmod 0777 /data/vendor/camera/golden_rear_dc_cal_wt.bin
+    chmod 0777 /data/vendor/camera/golden_s5k3l6_ii_ov2180_ii.bin
+#N17 code for HQ-295629 by lienci at 20230516 end
+
+#N17 code for HQ-290558 by baoguangxiu at 2023/05/30 start
+#touch
+    chown system system /sys/class/touch/touch_dev/palm_sensor
+#N17 code for HQ-290558 by baoguangxiu at 2023/05/30 end
+# N17 code for HQ-295627 by lienci at 2023/05/21 start
+#intsense bokeh use
+    mkdir /data/vendor/camera 0777 system camera
+    mkdir /data/vendor/camera/model 0777 system camera
+    mkdir /data/vendor/camera/model/dof_model 0777 system camera
+    mkdir /data/vendor/camera/model/rt_model 0777 system camera
+    mkdir /data/vendor/camera/dof_mecp 0777 system camera
+
+    chown system system /data/vendor/camera/com.xiaomi.dcal.wd.data
+    chown system system /data/vendor/camera/com.xiaomi.dcal.wu.data
+    chmod 0777 /data/vendor/camera/com.xiaomi.dcal.wd.data
+    chmod 0777 /data/vendor/camera/com.xiaomi.dcal.wu.data
+
+    copy /vendor/etc/camera/model/dof_model/capture_model /data/vendor/camera/model/dof_model/capture_model
+    copy /vendor/etc/camera/model/dof_model/capture_cache /data/vendor/camera/model/dof_model/capture_cache
+    copy /vendor/etc/camera/model/dof_model/capture_policy /data/vendor/camera/model/dof_model/capture_policy
+    copy /vendor/etc/camera/model/rt_model/preview_cache /data/vendor/camera/model/rt_model/preview_cache
+    copy /vendor/etc/camera/model/rt_model/preview_model /data/vendor/camera/model/rt_model/preview_model
+    copy /vendor/etc/camera/model/rt_model/preview_policy /data/vendor/camera/model/rt_model/preview_policy
+    copy /vendor/etc/camera/dof_mecp/dof_mecp.bin /data/vendor/camera/dof_mecp/dof_mecp.bin
+
+    chmod 0666 /data/vendor/camera/model/dof_model/capture_model
+    chmod 0666 /data/vendor/camera/model/dof_model/capture_cache
+    chmod 0666 /data/vendor/camera/model/dof_model/capture_policy
+    chmod 0666 /data/vendor/camera/model/rt_model/preview_cache
+    chmod 0666 /data/vendor/camera/model/rt_model/preview_model
+    chmod 0666 /data/vendor/camera/model/rt_model/preview_policy
+    chmod 0666 /data/vendor/camera/dof_mecp/dof_mecp.bin
+# N17 code for HQ-295627 by lienci at 2023/05/21 end
+#fingerprint
+    chown system system /dev/goodix_fp
+    chmod 0644 /dev/goodix_fp
+    chown system system /sys/bus/platform/devices/fingerprint/clk_enable
+    chmod 0660 /sys/bus/platform/devices/fingerprint/clk_enable
+    chown system /sys/bus/platform/devices/fingerprint/irq
+    chmod 0660 /sys/bus/platform/devices/fingerprint/irq
+    chown system system /sys/bus/platform/devices/fingerprint/hw_reset
+    chmod 0660 /sys/bus/platform/devices/fingerprint/hw_reset
+    chown system system /sys/bus/platform/devices/fingerprint/wakeup_enable
+    chmod 0660 /sys/bus/platform/devices/fingerprint/wakeup_enable
+    chown system system /sys/bus/platform/devices/fingerprint/fingerdown_wait
+    chmod 0660 /sys/bus/platform/devices/fingerprint/fingerdown_wait
+    start lightsensornvcfg
+
+on init
+    # Refer to http://source.android.com/devices/tech/storage/index.html
+    # It said, "Starting in Android 4.4, multiple external storage devices are surfaced to developers through
+    #           Context.getExternalFilesDirs(), Context.getExternalCacheDirs(), and Context.getObbDirs().
+    #           External storage devices surfaced through these APIs must be a semi-permanent part of the device (such as an SD card slot in a battery compartment).
+    #           Developers expect data stored in these locations to be available over long periods of time."
+    # Therefore, if the target doesn't support sd hot-plugging (Ex: the SD card slot in a battery compartment), we need to export SECONDARY_STORAGE in 'boot' section
+    #
+    # export SECONDARY_STORAGE /storage/sdcard1
+
+service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbotg /storage/usbotg
+    class late_start
+    disabled
+
+# N17 code for HQ-290597 by qiankang at 20230607 start
+on boot
+    chown system system /sys/devices/virtual/mi_display/disp_feature/disp-DSI-0/doze_brightness
+    chmod 0664 /sys/devices/virtual/mi_display/disp_feature/disp-DSI-0/doze_brightness
+    chmod 0777 /sys/class/mi_display/disp-DSI-0/brightness_clone
+    chown system system /sys/class/mi_display/disp-DSI-0/brightness_clone
+    chmod 0777 /dev/mi_display/disp_feature
+    chown system system /dev/mi_display/disp_feature
+    chmod 0777 /sys/class/mi_display/disp-DSI-0/disp_param
+    chown system system /sys/class/mi_display/disp-DSI-0/disp_param
+# N17 code for HQ-290597 by qiankang at 20230607 end
+
+# N17 code for HQ-310077 by zhangxian at 20230801 start
+on property:sys.boot_completed=1
+    write /sys/class/mi_display/disp-DSI-0/disp_param "6 1"
+# N17 code for HQ-310077 by zhangxian at 20230801 end
+
+# start mmstat
+on property:sys.boot_completed=1
+    mkdir /sys/kernel/tracing/instances/mmstat 711
+    write /sys/kernel/tracing/instances/mmstat/tracing_on 0
+    write /sys/kernel/tracing/instances/mmstat/buffer_size_kb 16
+    write /sys/kernel/tracing/instances/mmstat/events/mmstat/enable 1
+    write /sys/kernel/tracing/instances/mmstat/tracing_on 1
+
+#widevine driver node
+    chmod 0660 /dev/drm_wv
+    chown media system /dev/drm_wv
+
+#flashlight
+    chmod 0777 /sys/devices/platform/11e01000.i2c/i2c-5/5-0034/mt6360_led.4.auto/leds/mt6360_flash_ch1/brightness
+
+#N17 code for HQ-292533 by caoqian at 20230528 start
+on boot
+
+service lightsensornvcfg /vendor/bin/lightsensornvcfg.sh
+    disabled
+    user root
+    group root
+    oneshot
+
+service setwlansarlow /vendor/bin/setwlansarlow.sh
+    disabled
+    user root
+    oneshot
+
+service setwlansarhigh /vendor/bin/setwlansarhigh.sh
+    disabled
+    user root
+    oneshot
+
+service getwlansar /vendor/bin/getwlansar.sh
+    disabled
+    user root
+    oneshot
+    group root root
+
+service setsarcal /vendor/bin/setsarcal.sh
+    disabled
+    user root
+    oneshot
+on property:vendor.sysctl.tx=0
+    exec /vendor/bin/iwpriv wlan0 driver "SET_PWR_CTRL MySar 2"
+on property:vendor.sysctl.tx=1
+    exec /vendor/bin/iwpriv wlan0 driver "SET_PWR_CTRL MySar 1"
+#N17 code for HQ-292533 by caoqian at 20230528 end
+
+#N17 code for HQ-307700 by p-xionglei6 at 2023.07.24 start
+#Touch
+on property:sys.tp.grip_enable=0
+    write /sys/devices/virtual/touch/touch_dev/touch_edge 0
+on property:sys.tp.grip_enable=90
+    write /sys/devices/virtual/touch/touch_dev/touch_edge 1
+on property:sys.tp.grip_enable=270
+    write /sys/devices/virtual/touch/touch_dev/touch_edge 2
+#N17 code for HQ-307700 by p-xionglei6 at 2023.07.24 end
